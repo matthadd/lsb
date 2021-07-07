@@ -2,7 +2,9 @@ import numpy as np
 from PIL import Image
 from termcolor import colored
 
+
 def decode_image():
+    file_data = []
     for i in range(len(pixels)):
         # file_data.append(pixels[i])
         # print(file_data)
@@ -19,37 +21,19 @@ def inverse_decode_image():
     pass
 
 
-def message(mot):
-    # start_time = time.time()
-    for n in range(len(file_data)):
+def encode(source, message ):
+    source = 'IMG_7834.jpeg'
+    message = 'test'
 
-        # print("--- %s seconds ---" % (time.time() - start_time))
-        if n < len(mot):
-            # new_file_data.append(ord(mon[n]))
-            new_file_data.append(format((ord(mot[n])), "b"))
-        else:
-            new_file_data.append(file_data[n])
+    image = Image.open(source, 'r')
+    width, height = image.size
+    print('[+] lsb start')
+    pixels = np.array(list(image.getdata()))
+    print(pixels)
+    message += 'stenoEOF'
 
-    # print(new_file_data)
-    print("Message inscrit")
 
-mot = 'test'
-source = 'IMG_7834.jpeg'
-image = Image.open(source, 'r')
-file_data = []
-new_file_data = []
-width, height = image.size
+source = ""
+message = ""
+encode(source, message)
 
-print(width, height)
-
-print('[+] lsb start')
-
-pixels = np.array(image)
-
-# decode_image(file_data,pixels)
-# message(mot)
-print(mot)
-data = []
-for x in range(len(mot)):
-    data = [((ord(mot[x])), "08b"), ord(mot[x])]
-print(data)
