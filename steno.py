@@ -34,7 +34,7 @@ def message(mot):
     print("Message inscrit")
 
 mot = 'test'
-source = 'IMG_7834.jpeg'    
+source = 'IMG_7834.jpeg'
 image = Image.open(source, 'r')
 file_data = []
 new_file_data = []
