@@ -1,26 +1,6 @@
 import numpy as np
 from PIL import Image
-import time
-
-#############################__main__##############################################
-source = 'IMG_7834.jpeg'
-image = Image.open(source, 'r')
-file_data = []
-new_file_data = []
-width, heigh = image.size
-
-print(width, heigh)
-
-pixels = np.array(image)
-
-mot = input("message a transmettre : ")
-# decode_image(file_data,pixels)
-# message(mot)
-print(mot)
-for x in range(len(mot)):
-    print(format((ord(mot[x])), "b"), ord(mot[x]))
-
-start = input("Lancer le cryptage ? ")
+from termcolor import colored
 
 def decode_image():
     for i in range(len(pixels)):
@@ -34,6 +14,9 @@ def decode_image():
                 # print(file_data)
     print("file_data complete")
 
+
+def inverse_decode_image():
+    pass
 
 
 def message(mot):
@@ -50,16 +33,23 @@ def message(mot):
     # print(new_file_data)
     print("Message inscrit")
 
-if start == "oui":
-    decode_image()
-    message(mot)
-
-
-# print(pixels)
-# print(image.mode)
-
-
-
-
 mot = 'test'
+source = 'IMG_7834.jpeg'
+image = Image.open(source, 'r')
+file_data = []
+new_file_data = []
+width, height = image.size
 
+print(width, height)
+
+print('[+] lsb start')
+
+pixels = np.array(image)
+
+# decode_image(file_data,pixels)
+# message(mot)
+print(mot)
+data = []
+for x in range(len(mot)):
+    data = [((ord(mot[x])), "08b"), ord(mot[x])]
+print(data)
