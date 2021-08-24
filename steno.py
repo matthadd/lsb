@@ -31,13 +31,13 @@ class Hide():
                     for k in range(len(data[0, 0])):
                         # print(data[i,j,k], end = " ")
                         var = format(data[i, j, k], "08b")
-                        print(int(var, 2), var, end=" ")
+                        # print(int(var, 2), var, end=" ")
                         var = var[:-1] + str(self.message_b[index])
-                        print(self.message_b[index], var, int(var, 2), end=" ")
+                        # print(self.message_b[index], var, int(var, 2), end=" ")
                         index += 1
                         var = int(var, 2)
                         data[i, j, k] = var
-                        print(data[i, j, k])
+                        # print(data[i, j, k])
                         if index == len(self.message_b):
                             return None
 
@@ -57,7 +57,7 @@ class Dehide():
         self.message_b = ''
 
     def dehide(self):
-        image = Image.open(self.image_output).getdata()
+        image = Image.open(self.image_output)
         index = 0
         print('[+] lsb start reading image')
         data = np.array(image)
@@ -73,6 +73,7 @@ class Dehide():
                     if index > 2 * HEADER_SIZE:
                         return None
 
+    def result(self):
         message_lenght = int(self.message_b[:HEADER_SIZE], 2)
         print("final", self.message_b[:HEADER_SIZE], ".", self.message_b[HEADER_SIZE:message_lenght + HEADER_SIZE], ".",
               self.message_b[message_lenght + HEADER_SIZE:])
@@ -83,10 +84,11 @@ class Dehide():
 # Parameters from user
 file_name = 'test.txt'
 image_source = 'hs.jpeg'
-image_output = 'out.jpeg'
+image_output = 'hsout.jpeg'
 
 # main
 hide = Hide(file_name, image_source, image_output)
 hide.encode()
 dehide = Dehide(image_output)
 dehide.dehide()
+dehide.result()
